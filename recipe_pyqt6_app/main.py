@@ -9,7 +9,7 @@ from PyQt6.QtWidgets import QApplication, QPushButton, QFormLayout, QGridLayout,
 
 # Subclass QMainWindow to customize your application's main window
 class MainWindow(QMainWindow):
-    ingredients = ["Pick one!","Milk", "Sugar", "Egg", "All Purpose Flour", "Baking Soda", "Vanilla Extract", "Vegtable Oil", "Olive Oil","Honey", "Butter" ]
+    ingredients = ["Pick one!","Milk ", "Sugar ", "Egg ", "All Purpose Flour ", "Baking Soda ", "Vanilla Extract ", "Vegtable Oil ", "Olive Oil ","Honey ", "Butter " ]
     def __init__(self):
         super().__init__()
    
@@ -172,14 +172,20 @@ class MainWindow(QMainWindow):
         self.result.adjustSize()
         button.clicked.connect(self.update)
         layout1.addWidget(self.result)
+
     def update(self):
         text = ""
         for box in self.combo_boxes:
             boxtext = box.currentText()
+            recipe = "Milk and Cookies"()
             if boxtext == "Pick one!":
                 continue
             text += boxtext
+            if boxtext == "Milk ":
+                continue
+            text += recipe
         self.result.setText(text)
+        
 
     def value_changed(self, i):
         print(i)
@@ -191,10 +197,6 @@ class MainWindow(QMainWindow):
 
     def current_text_changed(self, s):
         print("Current text: ", s)
-
-
-
-
 
 
 app = QApplication(sys.argv)
