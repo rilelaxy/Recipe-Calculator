@@ -16,7 +16,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Reinvent Recipe")
 
 
-        # label stuff here
+        # Labeling and fonts
         labelinstructions = QLabel("Instructions: Step 1: Input ingredients, Step 2: Press calculate Step 3: Select your recipe and enjoy!")
         font = labelinstructions.font()
         font.setPointSize(10)
@@ -28,7 +28,7 @@ class MainWindow(QMainWindow):
         title.setFont(font)
         title.setAlignment(Qt.AlignmentFlag.AlignHCenter | Qt.AlignmentFlag.AlignVCenter)
 
-        # combo boxes here
+        # Comboboxes and item adding ingredients
         self.combo_boxes = []
         self.combobox1 = QComboBox()
         self.combobox1.addItems(MainWindow.ingredients)
@@ -50,102 +50,71 @@ class MainWindow(QMainWindow):
         self.combo_boxes.append(self.combobox6)
 
 
-        # spinbox stuff here
+        # Spinbox functions
+        self.amountmeasured2 = QSpinBox()
+        self.amountmeasured3 = QSpinBox()
+        self.amountmeasured4 = QSpinBox()
         self.amountmeasured = QSpinBox()
-
-
-        self.amountmeasured.setMinimum(-10)
-        self.amountmeasured.setMaximum(3)
-        # Or: widget.setRange(-10,3)
-
+        self.amountmeasured5 = QSpinBox()
+        self.amountmeasured6 = QSpinBox()
 
         
+        # Spinbox settings
+        self.amountmeasured.setMinimum(-10)
+        self.amountmeasured.setMaximum(3)
         self.amountmeasured.setSuffix(" of it's measured amount")
         self.amountmeasured.setSingleStep(1) 
         self.amountmeasured.valueChanged.connect(self.value_changed)
         self.amountmeasured.textChanged.connect(self.value_changed_str)
         
-        self.amountmeasured2 = QSpinBox()
-
-
         self.amountmeasured2.setMinimum(-10)
         self.amountmeasured2.setMaximum(3)
-        # Or: widget.setRange(-10,3)
-
-
         
         self.amountmeasured2.setSuffix(" of it's measured amount")
         self.amountmeasured2.setSingleStep(1) 
         self.amountmeasured2.valueChanged.connect(self.value_changed)
         self.amountmeasured2.textChanged.connect(self.value_changed_str)
 
-        self.amountmeasured3 = QSpinBox()
-
-
         self.amountmeasured3.setMinimum(-10)
         self.amountmeasured3.setMaximum(3)
-        # Or: widget.setRange(-10,3)
 
-
-        
         self.amountmeasured3.setSuffix(" of it's measured amount")
         self.amountmeasured3.setSingleStep(1) 
         self.amountmeasured3.valueChanged.connect(self.value_changed)
         self.amountmeasured3.textChanged.connect(self.value_changed_str)
         
-        self.amountmeasured4 = QSpinBox()
-
-
         self.amountmeasured4.setMinimum(-10)
         self.amountmeasured4.setMaximum(3)
-        # Or: widget.setRange(-10,3)
 
-
-        
         self.amountmeasured4.setSuffix(" of it's measured amount")
         self.amountmeasured4.setSingleStep(1) 
         self.amountmeasured4.valueChanged.connect(self.value_changed)
         self.amountmeasured4.textChanged.connect(self.value_changed_str)
 
-        self.amountmeasured5 = QSpinBox()
-
-
-        self.amountmeasured5.setMinimum(-10)
-        self.amountmeasured5.setMaximum(3)
-        # Or: widget.setRange(-10,3)
-
-
-        
         self.amountmeasured5.setSuffix(" of it's measured amount")
         self.amountmeasured5.setSingleStep(1) 
         self.amountmeasured5.valueChanged.connect(self.value_changed)
         self.amountmeasured5.textChanged.connect(self.value_changed_str)
 
-        self.amountmeasured6 = QSpinBox()
+        self.amountmeasured5.setMinimum(-10)
+        self.amountmeasured5.setMaximum(3)
 
-
-        self.amountmeasured6.setMinimum(-10)
-        self.amountmeasured6.setMaximum(3)
-        # Or: widget.setRange(-10,3)
-
-
-        
         self.amountmeasured6.setSuffix(" of it's measured amount")
         self.amountmeasured6.setSingleStep(1) 
         self.amountmeasured6.valueChanged.connect(self.value_changed)
         self.amountmeasured6.textChanged.connect(self.value_changed_str)
-        
-        
 
+        self.amountmeasured6.setMinimum(-10)
+        self.amountmeasured6.setMaximum(3)
 
+        self.setCentralWidget(self.amountmeasured)
+        
+        # Calculate button
         button = QPushButton(text="Give me my recipe!", parent=self)
         button.setFixedSize(200, 60)
 
-
         
-
-        self.setCentralWidget(self.amountmeasured)
-        # layout here
+        # Grid layout setup
         layout1 = QGridLayout()
         layout1.addWidget(title, 0, 0, )
         layout1.addWidget(labelinstructions, 1, 0, )
@@ -167,6 +136,7 @@ class MainWindow(QMainWindow):
         container.setLayout(layout1)
         self.setCentralWidget(container)
 
+        # Button functionality
         self.result = QLabel("Click button for recipe!")
         self.result.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.result.adjustSize()
@@ -177,15 +147,10 @@ class MainWindow(QMainWindow):
         text = ""
         for box in self.combo_boxes:
             boxtext = box.currentText()
-            recipe = "Milk and Cookies"()
             if boxtext == "Pick one!":
                 continue
             text += boxtext
-            if boxtext == "Milk ":
-                continue
-            text += recipe
         self.result.setText(text)
-        
 
     def value_changed(self, i):
         print(i)
